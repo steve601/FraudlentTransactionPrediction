@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fraud Detection</title>
+</head>
+
+<body style="
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+">
+
+    <div style="
+        width:100%;
+        max-width:650px;
+        background:#ffffff;
+        padding:35px 40px;
+        border-radius:14px;
+        box-shadow:0 25px 60px rgba(0,0,0,0.35);
+    ">
+
+        <h1 style="
+            text-align:center;
+            margin-bottom:8px;
+            color:#1f2933;
+            letter-spacing:0.5px;
+        ">
+            Fraud Transaction Prediction
+        </h1>
+
+        <p style="
+            text-align:center;
+            margin-bottom:30px;
+            color:#6b7280;
+            font-size:14px;
+        ">
+            Analyze transaction details and detect potential fraud
+        </p>
+
+        <form action="/predict" method="post">
+
+            <!-- Amount -->
+            <div style="margin-bottom:18px;">
+                <label style="font-weight:600; color:#374151;">Transaction Amount</label>
+                <input type="number" step="0.01" name="amount" required
+                       style="
+                           width:100%;
+                           padding:12px;
+                           margin-top:6px;
+                           border-radius:8px;
+                           border:1px solid #d1d5db;
+                           outline:none;
+                           font-size:14px;
+                       ">
+            </div>
+
+            <!-- Hour -->
+            <div style="margin-bottom:18px;">
+                <label style="font-weight:600; color:#374151;">Transaction Hour (0–23)</label>
+                <input type="number" min="0" max="23" name="transaction_hour" required
+                       style="
+                           width:100%;
+                           padding:12px;
+                           margin-top:6px;
+                           border-radius:8px;
+                           border:1px solid #d1d5db;
+                           font-size:14px;
+                       ">
+            </div>
+
+            <!-- Merchant -->
+            <div style="margin-bottom:18px;">
+                <label style="font-weight:600; color:#374151;">Merchant Category</label>
+                <select name="merchant_category" required
+                        style="
+                            width:100%;
+                            padding:12px;
+                            margin-top:6px;
+                            border-radius:8px;
+                            border:1px solid #d1d5db;
+                            font-size:14px;
+                            background:white;
+                            cursor:pointer;
+                        ">
+                    <option value="" disabled selected>Select category</option>
+                    <option value=0>Clothing</option>
+                    <option value=1>Electronics</option>
+                    <option value=2>Food</option>
+                    <option value=3>Grocery</option>
+                    <option value=4>Travel</option>
+                </select>
+            </div>
+
+            <!-- Foreign -->
+            <div style="margin-bottom:18px;">
+                <label style="font-weight:600; color:#374151;">Foreign Transaction</label>
+                <select name="foreign_transaction"
+                        style="
+                            width:100%;
+                            padding:12px;
+                            margin-top:6px;
+                            border-radius:8px;
+                            border:1px solid #d1d5db;
+                            font-size:14px;
+                            background:white;
+                        ">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <!-- Location -->
+            <div style="margin-bottom:18px;">
+                <label style="font-weight:600; color:#374151;">Location Mismatch</label>
+                <select name="location_mismatch"
+                        style="
+                            width:100%;
+                            padding:12px;
+                            margin-top:6px;
+                            border-radius:8px;
+                            border:1px solid #d1d5db;
+                            font-size:14px;
+                            background:white;
+                        ">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <!-- Trust -->
+            <div style="margin-bottom:18px;">
+                <label style="font-weight:600; color:#374151;">Device Trust Score</label>
+                <input type="number" step="0.01" name="device_trust_score" required
+                       style="
+                           width:100%;
+                           padding:12px;
+                           margin-top:6px;
+                           border-radius:8px;
+                           border:1px solid #d1d5db;
+                           font-size:14px;
+                       ">
+            </div>
+
+            <!-- Velocity -->
+            <div style="margin-bottom:18px;">
+                <label style="font-weight:600; color:#374151;">Velocity (Last 24h)</label>
+                <input type="number" name="velocity_last_24h" required
+                       style="
+                           width:100%;
+                           padding:12px;
+                           margin-top:6px;
+                           border-radius:8px;
+                           border:1px solid #d1d5db;
+                           font-size:14px;
+                       ">
+            </div>
+
+            <!-- Age -->
+            <div style="margin-bottom:30px;">
+                <label style="font-weight:600; color:#374151;">Cardholder Age</label>
+                <input type="number" name="cardholder_age" required
+                       style="
+                           width:100%;
+                           padding:12px;
+                           margin-top:6px;
+                           border-radius:8px;
+                           border:1px solid #d1d5db;
+                           font-size:14px;
+                       ">
+            </div>
+
+            <!-- Button -->
+            <button type="submit"
+                    style="
+                        width:100%;
+                        padding:14px;
+                        background:linear-gradient(135deg,#10b981,#059669);
+                        color:white;
+                        font-size:16px;
+                        font-weight:600;
+                        border:none;
+                        border-radius:10px;
+                        cursor:pointer;
+                        box-shadow:0 10px 20px rgba(16,185,129,0.4);
+                    ">
+                Predict Fraud Risk
+            </button>
+
+        </form>
+        {% if text %}
+            <div style="
+                margin-top:30px;
+                padding:15px;
+                background:#f3f4f6;
+                border-left:6px solid #10b981;
+                border-radius:6px;
+                color:#111827;
+                font-weight:600;
+                text-align:center;
+            ">
+                {{ text }}
+            </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
+

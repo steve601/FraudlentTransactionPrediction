@@ -1,0 +1,12 @@
+pandas
+numpy
+flask
+uvicorn
+matplotlib
+scikit-learn
+mlxtend
+seaborn
+mlflow
+optuna
+xgboost
+lightgbm

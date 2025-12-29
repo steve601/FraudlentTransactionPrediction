@@ -1,0 +1,21 @@
+[project]
+name = "mlproject"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.124.0",
+    "flask>=3.1.2",
+    "lightgbm>=4.6.0",
+    "matplotlib>=3.10.7",
+    "mlflow>=3.7.0",
+    "mlxtend>=0.23.4",
+    "numpy>=2.3.5",
+    "optuna>=4.6.0",
+    "pandas>=2.3.3",
+    "scikit-learn>=1.7.2",
+    "seaborn>=0.13.2",
+    "uvicorn>=0.38.0",
+    "xgboost>=3.1.2",
+]
