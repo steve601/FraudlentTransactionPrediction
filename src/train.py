@@ -6,6 +6,9 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import precision_score, recall_score, f1_score,accuracy_score
 from sklearn.preprocessing import MinMaxScaler
+import os
+
+IS_CI = os.getenv("CI") == "true"
 
 data = pd.read_csv('data/credit_card_fraud_10k.csv')
 
@@ -41,4 +44,6 @@ print("Precision: ", precision)
 print("Recall: ", recall)
 print("F1 Score: ", f1)
 
-mlflow.sklearn.log_model(linear_model, artifact_path="model")
+if not IS_CI:
+    mlflow.sklearn.log_model(linear_model, name="model")
+
