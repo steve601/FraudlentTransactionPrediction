@@ -41,4 +41,4 @@ print("Precision: ", precision)
 print("Recall: ", recall)
 print("F1 Score: ", f1)
 
-mlflow.sklearn.save_model(linear_model, "final_model")
+mlflow.sklearn.log_model(linear_model, artifact_path="model")
